@@ -74,4 +74,3 @@ def dice(seq1,seq2):
 
     score = float(matches)/float(lenseq1 + lenseq2)
     return score
-print(dice("johanan", "john"))

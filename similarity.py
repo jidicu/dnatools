@@ -1,3 +1,5 @@
+import numpy as np
+
 # Levenshtein edit distance
 def levenshtein(source, target):
     if len(source) < len(target):
@@ -41,7 +43,7 @@ def levenshtein(source, target):
 (per discussion), otherwise 'AA' and 'AAAA' would have a
 dice coefficient of 1...
 """
-def dice_coefficient(seq1,seq2):
+def dice(seq1,seq2):
     if not len(seq1) or not len(seq2): return 0.0
     """ quick case for true duplicates """
     if seq1 == seq2: return 1.0
@@ -72,3 +74,4 @@ def dice_coefficient(seq1,seq2):
 
     score = float(matches)/float(lenseq1 + lenseq2)
     return score
+print(dice("johanan", "john"))

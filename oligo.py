@@ -1,22 +1,16 @@
-oligo1 = ""
+# This is a repeating sequence. The length of the repeat here is 50 bp.
 
 for i in range (0,50):
-    oligo1 = oligo1 + "A"
-oligo1 = oligo1 + "CCGGTTGGCC"
+    oligo = oligo + "A"
 
-print(oligo1)
-print(len(oligo1))
+# This is your sticky end.
+oligo = oligo + "CCGGTTGGCC"
 
+#This prints your oligo as an output.
+print(oligo)
+print(len(oligo))
 
-oligo2 = ""
-
-for i in range (0,50):
-    oligo2 = oligo2 + "A"
-oligo2 = oligo2 + "GGCCAACCGG"
-
-print(oligo2)
-print(len(oligo2))
-
+# This also writes your oligo into a text file.
 f = open('oligo.txt','w')
-f.write(oligo1 + "\n" + oligo2 + "\n")
+f.write(oligo + "\n")
 f.close()

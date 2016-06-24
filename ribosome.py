@@ -19,7 +19,7 @@ def translate(rna_seq):# Actual translation
     for i in xrange(0, len(rna_seq), 3):
         codon = rna_seq[i: i+3]
         amino_acid = codon_table.get(codon, '*')
-        if amino_acid != '*':
+        if amino_acid != '*': # Fix this to read through STOP
             peptide += amino_acid
         else:
             break
@@ -27,7 +27,10 @@ def translate(rna_seq):# Actual translation
     return peptide
 
 # User input prompt and verification
-dna_seq = raw_input("Enter your sequence: ")
+filename = raw_input("Enter the relative filepath: ")
+sequence_file = open(filename,"r")
+dna_seq = sequence_file.read()
+sequence_file.close()
 allowed_char = re.compile(r"a|c|t|g|u|A|T|C|G|U")
 if not allowed_char.findall(dna_seq):
     print("You did not enter a valid sequence. Restart the program and try again.")
@@ -41,9 +44,13 @@ rna_seq = dna_seq.replace("T","U")
 # Initialize codon dictionary
 bases = ['U', 'C', 'A', 'G']
 codons = [a+b+c for a in bases for b in bases for c in bases]
-amino_acids = 'FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG'
+amino_acids = 'FFLLSSSSYY--CC-WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG'
 codon_table = dict(zip(codons, amino_acids))
 
 peptide = translate(rna_seq)
+
+peptide_text = open("peptide.txt","w")
+peptide_text.write(peptide)
+peptide_text.close()
 
 print("RNA sequence: " + rna_seq + "\n" + "Amino acid sequence: " + peptide)
